@@ -1,0 +1,165 @@
+1. Because after foo + value, the result will autocast to Double. And other is Integer, Integer is never equal to Double, because Integer and Double are different types.
+
+2. javac -sourcepath src/main/java/ -cp /libraries/bowser-1.0.jar -d classes/ src/main/java/com/nintendo/games/Mario.java
+
+3. This code compile. But obviousily there is a mistake in (output = null). If user or user.getName() is Null, throw IllegalArgumentException because (output = null) will never be execute. Else, execution of (output = null) will throw NullPointerException.
+
+4. 
+
+public interface Biscuit {
+    Integer getCookingTime();
+    String getBrand();
+}
+
+5. 
+
+public abstract class SweetBiscuit implements Biscuit {
+    private final Integer cookingTime;
+    private final String brand;
+    protected SweetBiscuit(Integer cookingTime, String brand) {
+        this.cookingTime = cookingTime;
+        this.brand = brand;
+    }
+    @Override public Integer getCookingTime() {
+        return cookingTime;
+    }
+    @Override public String getBrand() {
+        return brand;
+    }
+}
+
+public class ChocolateBiscuit extends SweetBiscuit {
+    private final String chocolateType;
+    ChocolateBiscuit (Integer cookingTime, String brand, String chocolateType) {
+        super(cookingTime, brand);
+        this.chocolateType = chocolateType;
+    }
+    public String getChocolateType {
+        return chocolateType;
+    }
+}
+
+public class StrawberryBiscuit extends SweetBiscuit {
+    private final Integer strawberryAmounts;
+    StrawberryBiscuit (Integer cookingTime, String brand, Integer strawberryAmounts) {
+        super(cookingTime, brand);
+        this.strawberryAmounts = strawberryAmounts;
+    }
+    public String getStrawberryAmounts {
+        return strawberryAmounts;
+    }
+}
+
+6. 
+
+public class ChocolateBiscuit extends SweetBiscuit {
+    private final String chocolateType;
+    ChocolateBiscuit (Integer cookingTime, String brand, String chocolateType) {
+        super(cookingTime, brand);
+        this.chocolateType = chocolateType;
+    }
+    public String getChocolateType {
+        return chocolateType;
+    }
+    @Override public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if ((obj == null) || (getClass() != obj.getClass())) {
+            return false;
+        }
+        ChocolateBiscuit that = (ChocolateBiscuit) obj;
+
+        return (this.getCookingTime() == null ? that.getCookingTime() == null : this.getCookingTime().equals(that.getCookingTime())) && (this.getBrand() == null ? that.getBrand() == null : this.getBrand().equals(that.getBrand())) && (this.getChocolateType() == null ? that.getChocolateType() == null : this.getChocolateType().equals(that.getChocolateType()));
+    }
+    @Override public int hashCode() {
+        int result = this.getCookingTime() == null ? 0 : this.getCookingTime().hashCode();
+        result = 31 * result + this.getBrand() == null ? 0 : this.getBrand().hashCode();
+        result = 31 * result + this.getChocolateType() == null ? 0 : this.getChocolateType().hashCode();
+        return result;
+    }
+}
+
+7. 
+
+public class ConcreteInstrument<Wind super T> extends AbstractInstrument<T>
+
+8.
+
+Computation<Long> cLong = new Computation<Long>(10L);
+Computation<Integer> cInt = new Computation<Integer>(10);
+Computation<Number> cNum = new Computation<Number>(10);
+Computation<Double> cDou = new Computation<Double>(10d);
+Computation<Float> cFlo = new Computation<Float>(10f);
+None of them can be assigned to each other.
+
+9. 
+
+try {
+    //WORK
+} catch (InterruptException ie) {
+    Thread.currentThread().interrupt();
+    throw new RuntimeException(ie);
+}
+
+10. 
+
+public class Threading {
+    private final Object[] buffer = new Object[10];
+    private final Condition condition;
+    private final Lock lcok;
+    public Object take() {
+        lock.lock();
+        try{
+            while(condition) {
+                wait();
+            }
+            return buffer[index--];
+        } finally {
+            lock.unlock();
+        }
+    }
+}
+
+11. 
+
+ExecutorService executorservice = Executors.newScheduledThreadPool(999);
+executorservice.submit(work);
+    
+
+12. 
+
+buffer.flip();
+buffer.clear();
+
+
+13. 
+
+@FunctionalInterface
+public interface AddAddress {
+    String get(String address);
+}
+Function<String, String> function = (String address) -> "YueJing" + address
+
+14. 
+
+public class ChocolateBiscuitTest {
+    @Test
+    public void getBrandTest() {
+        ChocolateBiscuit cb = new ChocolateBiscuit(1， "Mars", "Devo");
+        assertEquals("Mars", cb.getBrand());
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
